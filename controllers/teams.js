@@ -2,8 +2,14 @@ const Team = require('../models/teams')
 
 
 const getAllTeams = async (req, res) => {
-  const Teams = await Team.find({})
-  res.status(200).json({ Teams })
+  try {
+    const Teams = await Team.find({})
+    res.status(200).json({ Teams })
+  } catch (error) {
+    res.status(404).json({ "msg": "Please try leter", "error": error })
+  }
+ 
+ 
 }
 
 const createTeam = async (req, res) => {

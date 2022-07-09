@@ -31,8 +31,8 @@ const deletePlayer = async (req, res) => {
     
   try {
     const player = await Player.findOneAndDelete({_id: player_id})
-    if(!player){return res.status(404).json({msg: `Player not exist with id:${player_id}`});}
-    res.status(200).json({msg: `Player delete with id:${player_id}`, data: player});
+    if(player == null){return res.status(404).json({msg: `Player not exist with id:${player_id}`});}
+      else {res.status(200).json({msg: `Player delete with id:${player_id}`, data: player});}
   
   } catch (error) {res.status(500).json({msg: `Player not exist with id:${player_id}`,error: error})}
   
@@ -42,8 +42,8 @@ const updatePlayer = async (req, res) => {
   
   try {
     const player = await Player.findOneAndUpdate({_id: player_id},req.body,{runValidators: true, new: true, overwrite:true,})
-    if(!player){return res.status(404).json({msg: `Player not exist with id:${player_id}`});}
-    res.status(200).json({msg: `Player update with id:${player_id}`, data: player});  
+    if(player == null){return res.status(404).json({msg: `Player not exist with id:${player_id}`});}
+      else {res.status(200).json({msg: `Player update with id:${player_id}`, data: player});  }
   
   } catch (error) {res.status(500).json({msg: `Player not exist with id:${player_id}`,error: error})}
   
